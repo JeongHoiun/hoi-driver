@@ -1,7 +1,9 @@
 import Head from 'next/head';
 import { Inter } from '@next/font/google';
 import styles from '../styles/Home.module.css';
-import Sidebar from '../components/commons/sidebar';
+import Sidebar from '../components/commons/Sidebar';
+import { useEffect, useState } from 'react';
+import { Board } from '../models';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -15,7 +17,7 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className={styles.main}>
-                <Sidebar></Sidebar>
+                <Sidebar />
             </main>
         </>
     );
