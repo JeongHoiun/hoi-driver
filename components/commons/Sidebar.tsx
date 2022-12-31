@@ -1,4 +1,5 @@
 import { Button } from '@mui/material';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Board } from '../../models';
 import * as S from './styles';
@@ -16,7 +17,7 @@ export default function Sidebar() {
     return (
         <S.SidebarRootDiv>
             {groups.map((group) => (
-                <Button variant="text" key={group.seq}>
+                <Button component={Link} href={`/${group.seq}`} variant="text" key={group.seq}>
                     {group.name}
                 </Button>
             ))}
