@@ -7,9 +7,9 @@ type Data = {
 };
 
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
-    var queryString = 'SELECT * FROM board';
+    const queryString = 'SELECT * FROM board';
 
-    mysql_connection.query(queryString, (err, rows, fields) => {
+    mysql_connection.query(queryString, (err, rows) => {
         res.status(200).json(rows);
     });
 }

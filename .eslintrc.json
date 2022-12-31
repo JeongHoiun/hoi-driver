@@ -1,3 +1,22 @@
 {
-  "extends": "next/core-web-vitals"
+    "extends": ["next/core-web-vitals", "airbnb-base", "plugin:@typescript-eslint/recommended"],
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint"],
+    "rules": {
+        "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+                "js": "never",
+                "jsx": "never",
+                "ts": "never",
+                "tsx": "never"
+            }
+        ],
+        "indent": ["error", 4],
+        "import/prefer-default-export": "off",
+        "comma-dangle": "off",
+        "camelcase": "off",
+        "object-curly-newline": "off"
+    }
 }
