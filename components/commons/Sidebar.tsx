@@ -16,7 +16,7 @@ export default function Sidebar() {
     return (
         <S.SidebarRootDiv>
             {groups.map((group) => (
-                <Button variant="text" key={group.id}>
+                <Button variant="text" key={group.seq}>
                     {group.name}
                 </Button>
             ))}
