@@ -7,6 +7,6 @@ export const SidebarRootDiv = styled('div')({
     padding: '32px',
     height: '100vh',
     alignItems: 'center',
-    gap: 32,
+    gap: 16,
     borderRight: '1px solid #ccc'
 });
