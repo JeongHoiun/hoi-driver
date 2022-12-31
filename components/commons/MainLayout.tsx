@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import styles from '../../styles/Home.module.css';
-import Sidebar from './Sidebar';
+import Sidebar from '../Sidebar';
 
 interface Props {
     children: React.ReactNode;
