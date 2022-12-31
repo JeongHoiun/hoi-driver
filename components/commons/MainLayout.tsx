@@ -1,12 +1,13 @@
 import Head from 'next/head';
-import { Inter } from '@next/font/google';
-import styles from '../styles/Home.module.css';
-import Sidebar from '../components/commons/Sidebar';
-import MainLayout from '../components/commons/MainLayout';
+import styles from '../../styles/Home.module.css';
+import Sidebar from './Sidebar';
 
-const inter = Inter({ subsets: ['latin'] });
+interface Props {
+    children: React.ReactNode;
+}
 
-function HomeContents() {
+export default function MainLayout(props: Props) {
+    const { children } = props;
     return (
         <>
             <Head>
@@ -17,11 +18,8 @@ function HomeContents() {
             </Head>
             <main className={styles.main}>
                 <Sidebar />
+                {children}
             </main>
         </>
     );
-}
-
-export default function Home() {
-    return <MainLayout>{HomeContents()}</MainLayout>;
 }
