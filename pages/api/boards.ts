@@ -11,5 +11,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 
     mysql_connection.query(queryString, (err, rows) => {
         res.status(200).json(rows);
+        res.end();
     });
 }
