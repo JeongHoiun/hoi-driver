@@ -10,3 +10,13 @@ export const SidebarRootDiv = styled('div')({
     gap: 16,
     borderRight: '1px solid #ccc'
 });
+
+export const CreateNewBoardContentDiv = styled('div')({
+    display: 'flex',
+    flexDirection: 'column',
+    width: '380px',
+    marginTop: '16px',
+    '&:first-of-type': {
+        marginTop: 0
+    }
+});

@@ -5,8 +5,10 @@ import {
     DialogContent,
     DialogProps,
     DialogTitle,
-    TextField
+    TextField,
+    Typography
 } from '@mui/material';
+import * as S from './styles';
 
 export default function CreateNewBoardDialog(props: DialogProps) {
     const { open, onClose } = props;
@@ -19,7 +21,15 @@ export default function CreateNewBoardDialog(props: DialogProps) {
         <Dialog open={open} onClose={onClose}>
             <DialogTitle>Create New Board</DialogTitle>
             <DialogContent>
-                <TextField placeholder="Board name" />
+                <S.CreateNewBoardContentDiv>
+                    <Typography>게시판 이름</Typography>
+                    <TextField placeholder="Board name" />
+                </S.CreateNewBoardContentDiv>
+
+                <S.CreateNewBoardContentDiv>
+                    <Typography>비밀번호 (비어있을 시 공개 게시판)</Typography>
+                    <TextField placeholder="Password" />
+                </S.CreateNewBoardContentDiv>
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleClose}>Cancel</Button>
