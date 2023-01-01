@@ -10,7 +10,9 @@ export default function Sidebar() {
     const [openCreateNewBoardDialog, setOpenCreateNewBoardDialog] = useState(false);
     useEffect(() => {
         const fetchPhotos = async () => {
-            const res = await fetch('/api/boards');
+            const res = await fetch('/api/boards', {
+                method: 'GET'
+            });
             const arr: Board[] = await res.json();
             setGroups(arr);
         };

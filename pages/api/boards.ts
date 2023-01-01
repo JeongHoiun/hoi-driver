@@ -6,11 +6,46 @@ type Data = {
     name: string;
 };
 
-export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
-    const queryString = 'SELECT * FROM board';
+export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+    return new Promise(() => {
+        switch (req.method) {
+            case 'GET': {
+                const fetchBoardListQueryString = 'SELECT * FROM board';
 
-    mysql_connection.query(queryString, (err, rows) => {
-        res.status(200).json(rows);
-        res.end();
+                try {
+                    mysql_connection.query(fetchBoardListQueryString, (err, rows) => {
+                        res.status(200).json(rows);
+                        res.end();
+                    });
+                } catch (err) {
+                    res.status(500).json({ name: 'Internal Server Error' });
+                    res.end();
+                }
+                break;
+            }
+            case 'POST': {
+                const { name, password } = JSON.parse(req.body);
+
+                const createBoardQueryString = 'INSERT INTO board (name, password) VALUES (?, ?)';
+                try {
+                    mysql_connection.query(
+                        createBoardQueryString,
+                        [name, password],
+                        (err, rows) => {
+                            res.status(200).json(rows);
+                            res.end();
+                        }
+                    );
+                } catch (err) {
+                    res.status(500).json({ name: 'Internal Server Error' });
+                    res.end();
+                }
+                break;
+            }
+            default: {
+                res.status(404).json({ name: 'Not Found' });
+                res.end();
+            }
+        }
     });
 }
