@@ -13,10 +13,10 @@
                 "tsx": "never"
             }
         ],
-        "indent": ["error", 4],
         "import/prefer-default-export": "off",
         "comma-dangle": "off",
         "camelcase": "off",
-        "object-curly-newline": "off"
+        "object-curly-newline": "off",
+        "indent": ["error", 4, { "SwitchCase": 1 }]
     }
 }
