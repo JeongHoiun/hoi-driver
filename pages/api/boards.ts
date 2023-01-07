@@ -42,6 +42,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
                 }
                 break;
             }
+            case 'DELETE': {
+                const { seq } = JSON.parse(req.body);
+
+                const deleteBoardQueryString = 'DELETE FROM board where seq=(?)';
+                try {
+                    mysql_connection.query(deleteBoardQueryString, [seq], (err, rows) => {
+                        res.status(200).json(rows);
+                        res.end();
+                    });
+                } catch (err) {
+                    res.status(500).json({ name: 'Internal Server Error' });
+                    res.end();
+                }
+                break;
+            }
             default: {
                 res.status(404).json({ name: 'Not Found' });
                 res.end();

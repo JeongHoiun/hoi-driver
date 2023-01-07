@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Board } from '../../models';
+import BoardListItem from './BoardListItem';
 import CreateNewBoardDialog from './CreateNewBoardDialog';
 import * as S from './styles';
 
@@ -35,9 +35,7 @@ export default function Sidebar() {
                 />
             )}
             {groups.map((group) => (
-                <Button component={Link} href={`/${group.seq}`} variant="text" key={group.seq}>
-                    {group.name}
-                </Button>
+                <BoardListItem board={group} key={group.seq} />
             ))}
             <Button variant="contained" onClick={handleCreateNewBoardDialogOpen}>
                 Create new board
