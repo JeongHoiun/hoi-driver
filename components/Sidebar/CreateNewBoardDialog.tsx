@@ -4,11 +4,10 @@ import {
     DialogActions,
     DialogContent,
     DialogProps,
-    DialogTitle,
-    TextField,
-    Typography
+    DialogTitle
 } from '@mui/material';
 import { useState } from 'react';
+import HoiTextField from '../commons/HoiTextField';
 import * as S from './styles';
 
 export default function CreateNewBoardDialog(props: DialogProps) {
@@ -41,8 +40,8 @@ export default function CreateNewBoardDialog(props: DialogProps) {
             <DialogTitle>Create New Board</DialogTitle>
             <DialogContent>
                 <S.CreateNewBoardContentDiv>
-                    <Typography>게시판 이름</Typography>
-                    <TextField
+                    <HoiTextField
+                        label="게시판 이름"
                         placeholder="Board name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
@@ -50,8 +49,8 @@ export default function CreateNewBoardDialog(props: DialogProps) {
                 </S.CreateNewBoardContentDiv>
 
                 <S.CreateNewBoardContentDiv>
-                    <Typography>비밀번호 (비어있을 시 공개 게시판)</Typography>
-                    <TextField
+                    <HoiTextField
+                        label="비밀번호 (비어있을 시 공개 게시판)"
                         type="password"
                         placeholder="Password"
                         value={password}
