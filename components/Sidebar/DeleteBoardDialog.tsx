@@ -21,16 +21,14 @@ export default function DeleteBoardDialog(props: DialogProps & Props) {
             dialogProps.onClose({}, 'escapeKeyDown');
         }
     };
-    const handleDeleteButtonClick = () => {
-        const fetchPhotos = async () => {
-            await fetch('/api/boards', {
-                method: 'delete',
-                body: JSON.stringify({
-                    seq: board.seq
-                })
-            });
-        };
-        fetchPhotos();
+
+    const handleDeleteButtonClick = async () => {
+        await fetch('/api/boards', {
+            method: 'delete',
+            body: JSON.stringify({
+                seq: board.seq
+            })
+        });
         handleClose();
     };
 

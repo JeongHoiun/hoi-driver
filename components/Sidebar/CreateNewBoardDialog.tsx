@@ -21,17 +21,14 @@ export default function CreateNewBoardDialog(props: DialogProps) {
         }
     };
 
-    const handleCreateButtonClick = () => {
-        const fetchPhotos = async () => {
-            await fetch('/api/boards', {
-                method: 'POST',
-                body: JSON.stringify({
-                    name,
-                    password: password || null
-                })
-            });
-        };
-        fetchPhotos();
+    const handleCreateButtonClick = async () => {
+        await fetch('/api/boards', {
+            method: 'POST',
+            body: JSON.stringify({
+                name,
+                password: password || null
+            })
+        });
         handleClose();
     };
 
