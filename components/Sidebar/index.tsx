@@ -7,7 +7,7 @@ import * as S from './styles';
 
 export default function Sidebar() {
     const [openCreateNewBoardDialog, setOpenCreateNewBoardDialog] = useState(false);
-    const { boards } = useFetchBoards();
+    const { data: boards } = useFetchBoards();
 
     const handleCreateNewBoardDialogOpen = () => {
         setOpenCreateNewBoardDialog(true);
