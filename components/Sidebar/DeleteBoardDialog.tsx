@@ -39,12 +39,12 @@ export default function DeleteBoardDialog(props: DialogProps & Props) {
             <DialogTitle>Delete Board</DialogTitle>
             <DialogContent>
                 <S.CreateNewBoardContentDiv>
-                    <Typography>게시판 이름 :</Typography>
+                    <Typography variant="subtitle1">게시판 이름 :</Typography>
                     <Typography variant="body1">{board.name}</Typography>
                 </S.CreateNewBoardContentDiv>
 
                 <S.CreateNewBoardContentDiv>
-                    <Typography>삭제하시겠습니까?</Typography>
+                    <Typography variant="subtitle1">삭제하시겠습니까?</Typography>
                 </S.CreateNewBoardContentDiv>
             </DialogContent>
             <DialogActions>
