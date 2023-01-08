@@ -1,22 +1,13 @@
 import { Button } from '@mui/material';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { Board } from '../../models';
+import { useState } from 'react';
+import { useFetchBoards } from '../../hooks/boards';
 import BoardListItem from './BoardListItem';
 import CreateNewBoardDialog from './CreateNewBoardDialog';
 import * as S from './styles';
 
 export default function Sidebar() {
-    const [groups, setGroups] = useState<Board[]>([]);
     const [openCreateNewBoardDialog, setOpenCreateNewBoardDialog] = useState(false);
-    useEffect(() => {
-        const fetchPhotos = async () => {
-            const res = await axios.get('/api/boards');
-            const arr: Board[] = await res.data;
-            setGroups(arr);
-        };
-        fetchPhotos();
-    }, []);
+    const { boards } = useFetchBoards();
 
     const handleCreateNewBoardDialogOpen = () => {
         setOpenCreateNewBoardDialog(true);
@@ -33,8 +24,8 @@ export default function Sidebar() {
                     onClose={handleCreateNewBoardDialogClose}
                 />
             )}
-            {groups.map((group) => (
-                <BoardListItem board={group} key={group.seq} />
+            {boards?.map((board) => (
+                <BoardListItem board={board} key={board.seq} />
             ))}
             <Button variant="contained" onClick={handleCreateNewBoardDialogOpen}>
                 Create new board
