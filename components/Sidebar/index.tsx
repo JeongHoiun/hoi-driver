@@ -1,4 +1,5 @@
 import { Button } from '@mui/material';
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Board } from '../../models';
 import BoardListItem from './BoardListItem';
@@ -10,10 +11,8 @@ export default function Sidebar() {
     const [openCreateNewBoardDialog, setOpenCreateNewBoardDialog] = useState(false);
     useEffect(() => {
         const fetchPhotos = async () => {
-            const res = await fetch('/api/boards', {
-                method: 'GET'
-            });
-            const arr: Board[] = await res.json();
+            const res = await axios.get('/api/boards');
+            const arr: Board[] = await res.data;
             setGroups(arr);
         };
         fetchPhotos();

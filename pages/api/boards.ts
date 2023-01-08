@@ -24,7 +24,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
                 break;
             }
             case 'POST': {
-                const { name, password } = JSON.parse(req.body);
+                const { name, password } = req.body;
 
                 const createBoardQueryString = 'INSERT INTO board (name, password) VALUES (?, ?)';
                 try {
@@ -43,7 +43,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
                 break;
             }
             case 'PATCH': {
-                const { name, seq } = JSON.parse(req.body);
+                const { name, seq } = req.body;
 
                 const createBoardQueryString = 'UPDATE board SET name = (?) WHERE seq = (?)';
                 try {
@@ -58,7 +58,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
                 break;
             }
             case 'DELETE': {
-                const { seq } = JSON.parse(req.body);
+                const { seq } = req.body;
 
                 const deleteBoardQueryString = 'DELETE FROM board where seq=(?)';
                 try {

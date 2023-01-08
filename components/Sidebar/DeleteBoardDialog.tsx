@@ -7,6 +7,7 @@ import {
     DialogTitle,
     Typography
 } from '@mui/material';
+import axios from 'axios';
 import { Board } from '../../models';
 import * as S from './styles';
 
@@ -23,11 +24,10 @@ export default function DeleteBoardDialog(props: DialogProps & Props) {
     };
 
     const handleDeleteButtonClick = async () => {
-        await fetch('/api/boards', {
-            method: 'delete',
-            body: JSON.stringify({
+        await axios.delete('/api/boards', {
+            data: {
                 seq: board.seq
-            })
+            }
         });
         handleClose();
     };

@@ -6,6 +6,7 @@ import {
     DialogProps,
     DialogTitle
 } from '@mui/material';
+import axios from 'axios';
 import { useState } from 'react';
 import { Board } from '../../models';
 import HoiTextField from '../commons/HoiTextField';
@@ -25,12 +26,9 @@ export default function UpdateBoardDialog(props: Props & DialogProps) {
     };
 
     const handleCreateButtonClick = async () => {
-        await fetch('/api/boards', {
-            method: 'PATCH',
-            body: JSON.stringify({
-                name,
-                seq: board.seq
-            })
+        await axios.patch('/api/boards', {
+            name,
+            seq: board.seq
         });
 
         handleClose();

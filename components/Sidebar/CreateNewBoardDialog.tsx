@@ -6,6 +6,7 @@ import {
     DialogProps,
     DialogTitle
 } from '@mui/material';
+import axios from 'axios';
 import { useState } from 'react';
 import HoiTextField from '../commons/HoiTextField';
 import * as S from './styles';
@@ -22,12 +23,9 @@ export default function CreateNewBoardDialog(props: DialogProps) {
     };
 
     const handleCreateButtonClick = async () => {
-        await fetch('/api/boards', {
-            method: 'POST',
-            body: JSON.stringify({
-                name,
-                password: password || null
-            })
+        await axios.post('/api/boards', {
+            name,
+            password: password || null
         });
         handleClose();
     };
