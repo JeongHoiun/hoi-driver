@@ -6,8 +6,8 @@ import {
     DialogProps,
     DialogTitle
 } from '@mui/material';
-import axios from 'axios';
 import { useState } from 'react';
+import { useUpdateBoards } from '../../hooks/boards';
 import { Board } from '../../models';
 import HoiTextField from '../commons/HoiTextField';
 import * as S from './styles';
@@ -18,6 +18,7 @@ interface Props {
 export default function UpdateBoardDialog(props: Props & DialogProps) {
     const { open, onClose, board, ...dialogProps } = props;
     const [name, setName] = useState('');
+    const { mutate } = useUpdateBoards();
 
     const handleClose = () => {
         if (onClose) {
@@ -26,11 +27,7 @@ export default function UpdateBoardDialog(props: Props & DialogProps) {
     };
 
     const handleCreateButtonClick = async () => {
-        await axios.patch('/api/boards', {
-            name,
-            seq: board.seq
-        });
-
+        mutate({ seq: board.seq, name });
         handleClose();
     };
 

@@ -6,8 +6,8 @@ import {
     DialogProps,
     DialogTitle
 } from '@mui/material';
-import axios from 'axios';
 import { useState } from 'react';
+import { useCreateBoards } from '../../hooks/boards';
 import HoiTextField from '../commons/HoiTextField';
 import * as S from './styles';
 
@@ -15,6 +15,7 @@ export default function CreateNewBoardDialog(props: DialogProps) {
     const { open, onClose } = props;
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
+    const { mutate } = useCreateBoards();
 
     const handleClose = () => {
         if (onClose) {
@@ -23,10 +24,7 @@ export default function CreateNewBoardDialog(props: DialogProps) {
     };
 
     const handleCreateButtonClick = async () => {
-        await axios.post('/api/boards', {
-            name,
-            password: password || null
-        });
+        mutate({ name, password });
         handleClose();
     };
 

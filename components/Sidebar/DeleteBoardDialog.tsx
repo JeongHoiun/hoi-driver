@@ -7,7 +7,7 @@ import {
     DialogTitle,
     Typography
 } from '@mui/material';
-import axios from 'axios';
+import { useDeleteBoards } from '../../hooks/boards';
 import { Board } from '../../models';
 import * as S from './styles';
 
@@ -17,6 +17,7 @@ interface Props {
 
 export default function DeleteBoardDialog(props: DialogProps & Props) {
     const { board, ...dialogProps } = props;
+    const { mutate } = useDeleteBoards();
     const handleClose = () => {
         if (dialogProps.onClose) {
             dialogProps.onClose({}, 'escapeKeyDown');
@@ -24,11 +25,7 @@ export default function DeleteBoardDialog(props: DialogProps & Props) {
     };
 
     const handleDeleteButtonClick = async () => {
-        await axios.delete('/api/boards', {
-            data: {
-                seq: board.seq
-            }
-        });
+        mutate(board.seq);
         handleClose();
     };
 

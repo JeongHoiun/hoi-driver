@@ -1,4 +1,4 @@
 export interface Board {
     name: string;
-    seq: string;
+    seq: number;
 }
