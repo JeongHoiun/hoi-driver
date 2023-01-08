@@ -1,5 +1,9 @@
 {
-    "extends": ["next/core-web-vitals", "airbnb-base", "plugin:@typescript-eslint/recommended"],
+    "extends": [
+        "next/core-web-vitals",
+        "airbnb-base",
+        "plugin:@typescript-eslint/recommended"
+    ],
     "parser": "@typescript-eslint/parser",
     "plugins": ["@typescript-eslint"],
     "rules": {
@@ -17,6 +21,7 @@
         "comma-dangle": "off",
         "camelcase": "off",
         "object-curly-newline": "off",
-        "indent": ["error", 4, { "SwitchCase": 1 }]
+        "indent": ["error", 4, { "SwitchCase": 1 }],
+        "implicit-arrow-linebreak": "off"
     }
 }
