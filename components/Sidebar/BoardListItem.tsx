@@ -26,6 +26,16 @@ export default function BoardListItem(props: Props) {
         setMenuAnchorEl(null);
     };
 
+    const handleUpdateBoardClick = () => {
+        setOpenUpdateBoardDialog(true);
+        setMenuAnchorEl(null);
+    };
+
+    const handleDeleteBoardClick = () => {
+        setOpenDeleteBoardDialog(true);
+        setMenuAnchorEl(null);
+    };
+
     return (
         <S.BoardListItemRootDiv
             onMouseEnter={() => setItemMenuVisible(true)}
@@ -55,14 +65,10 @@ export default function BoardListItem(props: Props) {
             </S.MoreIconButton>
             <Popover open={menuAnchorEl !== null} anchorEl={menuAnchorEl} onClose={handleMenuClose}>
                 <div>
-                    <Button variant="text" onClick={() => setOpenUpdateBoardDialog(true)}>
+                    <Button variant="text" onClick={handleUpdateBoardClick}>
                         수정
                     </Button>
-                    <Button
-                        color="secondary"
-                        variant="text"
-                        onClick={() => setOpenDeleteBoardDialog(true)}
-                    >
+                    <Button color="secondary" variant="text" onClick={handleDeleteBoardClick}>
                         삭제
                     </Button>
                 </div>
