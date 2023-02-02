@@ -24,9 +24,11 @@ export default function Sidebar() {
                     onClose={handleCreateNewBoardDialogClose}
                 />
             )}
-            {boards?.map((board) => (
-                <BoardListItem board={board} key={board.seq} />
-            ))}
+            <S.BoardListDiv>
+                {boards?.map((board) => (
+                    <BoardListItem board={board} key={board.seq} />
+                ))}
+            </S.BoardListDiv>
             <Button variant="contained" onClick={handleCreateNewBoardDialogOpen}>
                 Create new board
             </Button>

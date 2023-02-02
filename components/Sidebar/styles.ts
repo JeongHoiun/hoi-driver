@@ -6,7 +6,7 @@ export const SidebarRootDiv = styled('div')({
     display: 'flex',
     flexDirection: 'column',
     width: '240px',
-    padding: '32px',
+    padding: '32px 0px',
     height: '100vh',
     alignItems: 'center',
     gap: 16,
@@ -53,4 +53,13 @@ export const MoreIconButton = styled(IconButton)({
 export const MoreIcon = styled(MoreVertIcon)({
     width: '24px',
     height: '24px'
+});
+
+export const BoardListDiv = styled('div')({
+    display: 'flex',
+    flexDirection: 'column',
+    maxHeight: '600px',
+    overflowY: 'auto',
+    width: '100%',
+    alignItems: 'center'
 });
