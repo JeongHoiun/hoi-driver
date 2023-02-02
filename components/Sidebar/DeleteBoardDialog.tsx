@@ -7,7 +7,7 @@ import {
     DialogTitle,
     Typography
 } from '@mui/material';
-import { useDeleteBoards } from '../../hooks/boards';
+import { useDeleteBoards } from '../../queries/boards';
 import { Board } from '../../models';
 import * as S from './styles';
 

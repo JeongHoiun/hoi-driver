@@ -7,7 +7,7 @@ import {
     DialogTitle
 } from '@mui/material';
 import { useState } from 'react';
-import { useUpdateBoards } from '../../hooks/boards';
+import { useUpdateBoards } from '../../queries/boards';
 import { Board } from '../../models';
 import HoiTextField from '../commons/HoiTextField';
 import * as S from './styles';

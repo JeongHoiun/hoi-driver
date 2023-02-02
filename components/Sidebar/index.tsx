@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 import { useState } from 'react';
-import { useFetchBoards } from '../../hooks/boards';
+import { useFetchBoards } from '../../queries/boards';
 import BoardListItem from './BoardListItem';
 import CreateNewBoardDialog from './CreateNewBoardDialog';
 import * as S from './styles';
