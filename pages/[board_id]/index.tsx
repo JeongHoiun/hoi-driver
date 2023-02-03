@@ -1,16 +1,13 @@
 import { useRouter } from 'next/router';
+import BoardComponent from '../../components/BoardComponent';
 import MainLayout from '../../components/commons/MainLayout';
 
-function BoardContents() {
+export default function Board() {
     const router = useRouter();
     const { board_id } = router.query;
-    return <div>{board_id}</div>;
-}
-
-export default function Board() {
     return (
         <MainLayout>
-            <BoardContents />
+            <BoardComponent board_id={board_id as string} />
         </MainLayout>
     );
 }

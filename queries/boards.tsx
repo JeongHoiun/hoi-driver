@@ -1,10 +1,20 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { Board } from '../models';
 import { queryClient } from '../pages/_app';
-import { createBoard, deleteBoard, fetchBoards, updateBoard } from '../services/boards';
+import {
+    createBoard,
+    deleteBoard,
+    fetchBoardInfo,
+    fetchBoards,
+    updateBoard
+} from '../services/boards';
 
 export function useFetchBoards() {
     return useQuery<Board[], Error>(['boards'], fetchBoards);
+}
+
+export function useFetchBoardInfo(board_id: string) {
+    return useQuery<Board, Error>(['board', board_id], () => fetchBoardInfo(board_id));
 }
 
 export function useCreateBoards() {

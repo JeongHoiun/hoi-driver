@@ -7,6 +7,12 @@ export const fetchBoards = async () => {
     return boards;
 };
 
+export const fetchBoardInfo = async (board_id: string) => {
+    const res = await axios.get(`/api/board/${board_id}`);
+    const board: Board = res.data;
+    return board;
+};
+
 export const createBoard = async ({ name, password }: { name: string; password: string }) => {
     const res = await axios.post('/api/boards', {
         name,
