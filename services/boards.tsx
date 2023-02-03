@@ -7,13 +7,7 @@ export const fetchBoards = async () => {
     return boards;
 };
 
-export const createBoard = async ({
-    name,
-    password
-}: {
-    name: string;
-    password: string;
-}) => {
+export const createBoard = async ({ name, password }: { name: string; password: string }) => {
     const res = await axios.post('/api/boards', {
         name,
         password: password || null
