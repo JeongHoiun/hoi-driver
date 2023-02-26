@@ -11,3 +11,7 @@ export const BoardTitleDiv = styled('div')({
     alignItems: 'center',
     gap: '32px'
 });
+
+export const UploadDialogContentDiv = styled('div')({
+    minWidth: '400px'
+});

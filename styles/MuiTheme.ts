@@ -64,7 +64,14 @@ export const MuiTheme = createTheme({
             styleOverrides: {
                 root: {
                     padding: '8px 16px',
-                    textTransform: 'none'
+                    textTransform: 'none',
+                    boxShadow: 'none',
+                    '&:hover': {
+                        boxShadow: 'none'
+                    },
+                    '&.Mui-focusVisible': {
+                        boxShadow: 'none'
+                    }
                 }
             }
         }
