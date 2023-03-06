@@ -74,6 +74,28 @@ export const MuiTheme = createTheme({
                     }
                 }
             }
+        },
+        MuiDialogTitle: {
+            styleOverrides: {
+                root: {
+                    borderBottom: '1px solid #ccc',
+                    marginBottom: '16px'
+                }
+            }
+        },
+        MuiDialogActions: {
+            styleOverrides: {
+                root: {
+                    borderTop: '1px solid #ccc'
+                }
+            }
+        },
+        MuiDialogContent: {
+            styleOverrides: {
+                root: {
+                    padding: '16px'
+                }
+            }
         }
     }
 });

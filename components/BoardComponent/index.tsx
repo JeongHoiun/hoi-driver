@@ -16,7 +16,9 @@ export default function BoardComponent(props: Props) {
 
     return (
         <S.BoardDiv>
-            <UploadDilaog open={openUploadDialog} onClose={() => setOpenUploadDialog(false)} />
+            {openUploadDialog && (
+                <UploadDilaog open={openUploadDialog} onClose={() => setOpenUploadDialog(false)} />
+            )}
             <S.BoardTitleDiv>
                 <Typography variant="h3" fontWeight={600}>
                     {board?.name}

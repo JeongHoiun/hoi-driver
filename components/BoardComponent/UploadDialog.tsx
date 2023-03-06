@@ -7,6 +7,7 @@ import {
     DialogContent,
     DialogProps,
     DialogTitle,
+    ListItem,
     TextField
 } from '@mui/material';
 import { useRef, useState } from 'react';
@@ -39,7 +40,9 @@ export default function UploadDilaog(props: DialogProps) {
             <DialogTitle>Upload</DialogTitle>
             <DialogContent>
                 <S.UploadDialogContentDiv>
-                    <Button onClick={onButtonClick}>Upload files...</Button>
+                    <S.UploadDialogButton variant="contained" onClick={onButtonClick}>
+                        Upload files...
+                    </S.UploadDialogButton>
                     <input
                         type="file"
                         id="file"
@@ -48,16 +51,19 @@ export default function UploadDilaog(props: DialogProps) {
                         multiple
                         onChange={(e) => setSelectedFiles(Array.from(e.target.files as FileList))}
                     />
-                    <div style={{ border: '1px solid gray', maxHeight: '400px' }}>
-                        {selectedFiles.map((file, idx) => (
-                            <div key={idx}>{file.name}</div>
-                        ))}
-                    </div>
+                    {selectedFiles && (
+                        <S.SelectedFileList>
+                            {selectedFiles.map((file, idx) => (
+                                <ListItem key={idx}>{file.name}</ListItem>
+                            ))}
+                        </S.SelectedFileList>
+                    )}
                     <Autocomplete
                         multiple
                         id="tags-filled"
                         options={[]}
                         freeSolo
+                        limitTags={5}
                         value={tags}
                         onChange={(e, v) => setTags(v)}
                         renderTags={(value, getTagProps) =>
@@ -73,8 +79,9 @@ export default function UploadDilaog(props: DialogProps) {
                         renderInput={(params) => (
                             <TextField
                                 {...params}
-                                variant="filled"
-                                label="Tag"
+                                variant="outlined"
+                                label="Tags"
+                                maxRows={3}
                                 placeholder="Input tag and press Enter"
                             />
                         )}
