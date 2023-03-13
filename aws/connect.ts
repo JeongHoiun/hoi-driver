@@ -1,27 +1,8 @@
 import AWS from 'aws-sdk';
 
-AWS.config.region = 'ap-northeast-2'; // 리전
-
-const Bucket = new AWS.S3({
-    apiVersion: '2006-03-01',
-    params: { Bucket: 'hoi-driver' }
-});
-
-Bucket.listBuckets((err, data) => {
-    if (err) {
-        console.log('Error', err);
-    } else {
-        console.log('Success', data.Buckets);
-    }
-});
-
-const uploadParams = { Bucket: 'hoi-driver', Key: 'sdg.txt', Body: 'awefawef' };
-
-Bucket.upload(uploadParams, (err, data) => {
-    if (err) {
-        console.log('Error', err);
-    }
-    if (data) {
-        console.log('Upload Success', data.Location);
-    }
+AWS.config.update({
+    accessKeyId: 'AKIAZFXIK26EC3HG7JN5',
+    secretAccessKey: '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',
+    region: 'ap-northeast-2',
+    signatureVersion: 'v4'
 });

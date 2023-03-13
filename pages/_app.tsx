@@ -4,6 +4,7 @@ import { ThemeProvider } from '@mui/material';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { MuiTheme } from '../styles/MuiTheme';
+import '../aws/connect';
 
 export const queryClient = new QueryClient();
 

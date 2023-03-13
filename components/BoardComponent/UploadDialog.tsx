@@ -11,6 +11,7 @@ import {
     TextField
 } from '@mui/material';
 import { useRef, useState } from 'react';
+import { uploadFiles } from '../../aws/uploadFiles';
 import * as S from './styles';
 
 export default function UploadDilaog(props: DialogProps) {
@@ -31,6 +32,7 @@ export default function UploadDilaog(props: DialogProps) {
 
     const handleUploadButtonClick = () => {
         if (props.onClose) {
+            uploadFiles(selectedFiles);
             props.onClose({}, 'escapeKeyDown');
         }
     };
@@ -91,7 +93,7 @@ export default function UploadDilaog(props: DialogProps) {
             <DialogActions>
                 <Button onClick={handleClose}>Cancel</Button>
                 <Button variant="contained" onClick={handleUploadButtonClick}>
-                    Create
+                    Upload
                 </Button>
             </DialogActions>
         </Dialog>
