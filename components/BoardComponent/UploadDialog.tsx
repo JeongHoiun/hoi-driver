@@ -14,7 +14,12 @@ import { useRef, useState } from 'react';
 import { uploadFiles } from '../../aws/uploadFiles';
 import * as S from './styles';
 
-export default function UploadDilaog(props: DialogProps) {
+interface Props {
+    boardId: string;
+}
+
+export default function UploadDilaog(props: DialogProps & Props) {
+    const { boardId, ...dialogProps } = props;
     const inputFile = useRef<HTMLInputElement | null>(null);
     const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
     const [tags, setTags] = useState<string[]>([]);
@@ -25,20 +30,20 @@ export default function UploadDilaog(props: DialogProps) {
     };
 
     const handleClose = () => {
-        if (props.onClose) {
-            props.onClose({}, 'escapeKeyDown');
+        if (dialogProps.onClose) {
+            dialogProps.onClose({}, 'escapeKeyDown');
         }
     };
 
-    const handleUploadButtonClick = () => {
-        if (props.onClose) {
-            uploadFiles(selectedFiles);
-            props.onClose({}, 'escapeKeyDown');
+    const handleUploadButtonClick = async () => {
+        if (dialogProps.onClose) {
+            await uploadFiles(selectedFiles, boardId);
+            dialogProps.onClose({}, 'escapeKeyDown');
         }
     };
 
     return (
-        <Dialog {...props}>
+        <Dialog {...dialogProps}>
             <DialogTitle>Upload</DialogTitle>
             <DialogContent>
                 <S.UploadDialogContentDiv>
