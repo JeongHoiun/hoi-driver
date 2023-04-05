@@ -1,7 +1,8 @@
 import AWS from 'aws-sdk';
 
 export const uploadFiles = async (files: File[], path: string) => {
-    files.map(async (file) => {
+    let a;
+    const re = files.map(async (file) => {
         const reader = new FileReader();
         reader.readAsBinaryString(file);
         const s3 = new AWS.S3();
@@ -10,6 +11,11 @@ export const uploadFiles = async (files: File[], path: string) => {
             Key: `${path}/${file.name}`,
             Body: file
         };
-        await s3.upload(params).promise();
+        const result = await s3
+            .upload(params)
+            .promise()
+            .then((v) => v);
+        return result;
     });
+    return re;
 };
