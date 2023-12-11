@@ -17,7 +17,7 @@ export const useFetchImages = () => {
         if (result.Contents) {
             const photoKeys = result.Contents.map((v) => v.Key);
             photoKeys.map((v) =>
-                s3.getObject({ Bucket: 'hoi-driver', Key: v as string, ResponseContentType: 'image/jpeg' }, (err, data) => {
+                s3.getObject({ Bucket: 'hoi-driver', Key: v as string }, (err, data) => {
                     if (err) { /* empty */ } else {
                         const blobData = new Blob([data.Body as Uint8Array]);
                         setPhotoUrls([...photoUrls,
