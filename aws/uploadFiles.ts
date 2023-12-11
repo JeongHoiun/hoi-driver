@@ -1,7 +1,6 @@
 import AWS from 'aws-sdk';
 
 export const uploadFiles = async (files: File[], path: string) => {
-    let a;
     const re = files.map(async (file) => {
         const reader = new FileReader();
         reader.readAsBinaryString(file);
