@@ -1,10 +1,11 @@
 import { Button, Typography } from '@mui/material';
 import UploadIcon from '@mui/icons-material/Upload';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import Image from 'next/image';
 import { useFetchBoardInfo } from '../../queries/boards';
 import * as S from './styles';
 import UploadDilaog from './UploadDialog';
-import { fetchImages } from '../../aws/fetchImages';
+import { useFetchImages } from '../../aws/useFetchImages';
 
 interface Props {
     board_id: string;
@@ -14,13 +15,10 @@ export default function BoardComponent(props: Props) {
     const { board_id } = props;
     const { data: board } = useFetchBoardInfo(board_id);
     const [openUploadDialog, setOpenUploadDialog] = useState(false);
-    const [imagesUrls, setImagesUrls] = useState<string[] | null>([]);
+    const { fetchImages, photoUrls } = useFetchImages();
 
     const handleButtonClick = async () => {
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        await fetchImages('1').then((v) => {
-            setImagesUrls(v);
-        });
+        await fetchImages('1');
     };
 
     return (
@@ -46,9 +44,8 @@ export default function BoardComponent(props: Props) {
                 </Button>
                 <Button onClick={handleButtonClick}>asdfasdf</Button>
             </S.BoardTitleDiv>
-            {imagesUrls?.map((imageUrl, index) => (
-                <img src={imageUrl} key={index} />
-            ))}
+            {photoUrls?.map((imageUrl, index) => <Image src={imageUrl} key={index} alt={`Picture ${index}`} width="180" height="180"/>
+            )}
         </S.BoardDiv>
     );
 }
