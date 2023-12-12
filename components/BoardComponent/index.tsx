@@ -14,7 +14,8 @@ export default function BoardComponent(props: Props) {
     const { board_id } = props;
     const { data: board } = useFetchBoardInfo(board_id);
     const [openUploadDialog, setOpenUploadDialog] = useState(false);
-    const { data: images, isLoading: loadingImages } = useFetchImages(board_id);
+    const [page, setPage] = useState(1); // TODO: implement pagination
+    const { data: images, isLoading: loadingImages } = useFetchImages(board_id, page);
 
     return (
         <S.BoardDiv>
