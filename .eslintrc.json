@@ -19,6 +19,7 @@
         "object-curly-newline": "off",
         "indent": ["error", 4, { "SwitchCase": 1 }],
         "implicit-arrow-linebreak": "off",
-        "function-paren-newline": "off"
+        "function-paren-newline": "off",
+        "@next/next/no-img-element": "off"
     }
 }
