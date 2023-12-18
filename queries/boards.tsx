@@ -1,4 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 import { Board } from '../models';
 import { queryClient } from '../pages/_app';
 import {
@@ -10,7 +11,7 @@ import {
 } from '../services/boards';
 
 export function useFetchBoards() {
-    return useQuery<Board[], Error>(['boards'], fetchBoards);
+    return useQuery<Board[], AxiosError>(['boards'], fetchBoards);
 }
 
 export function useFetchBoardInfo(board_id: string) {

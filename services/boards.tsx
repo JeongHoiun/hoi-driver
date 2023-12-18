@@ -3,6 +3,9 @@ import { Board } from '../models';
 
 export const fetchBoards = async () => {
     const res = await axios.get('/api/boards');
+    if (res.status !== 200) {
+        throw res;
+    }
     const boards: Board[] = res.data;
     return boards;
 };

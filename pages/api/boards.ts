@@ -23,16 +23,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
                     }
                 } else {
                     const fetchBoardListQueryString = 'SELECT * FROM board';
-
-                    try {
-                        mysql_connection.query(fetchBoardListQueryString, (err, rows) => {
+                    mysql_connection.query(fetchBoardListQueryString, (err, rows) => {
+                        if (err) {
+                            res.status(500).json({ name: 'Internal Server Error' });
+                            res.end();
+                        } else {
                             res.status(200).json(rows);
                             res.end();
-                        });
-                    } catch (err) {
-                        res.status(500).json({ name: 'Internal Server Error' });
-                        res.end();
-                    }
+                        }
+                    });
                 }
                 break;
             }
