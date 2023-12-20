@@ -13,6 +13,7 @@ import {
 import { useRef, useState } from 'react';
 import { uploadFiles } from '../../aws/uploadFiles';
 import * as S from './styles';
+import { useSaveFile } from '../../queries/files';
 
 interface Props {
     boardId: string;
@@ -23,6 +24,7 @@ export default function UploadDilaog(props: DialogProps & Props) {
     const inputFile = useRef<HTMLInputElement | null>(null);
     const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
     const [tags, setTags] = useState<string[]>([]);
+    const { mutate } = useSaveFile();
 
     const onButtonClick = () => {
         // `current` points to the mounted file input element
@@ -38,6 +40,7 @@ export default function UploadDilaog(props: DialogProps & Props) {
     const handleUploadButtonClick = async () => {
         if (dialogProps.onClose) {
             await uploadFiles(selectedFiles, boardId);
+            mutate({ fileName: selectedFiles[0].name, boardId: +boardId });
             dialogProps.onClose({}, 'escapeKeyDown');
         }
     };
