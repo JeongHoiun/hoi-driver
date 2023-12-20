@@ -10,29 +10,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     return new Promise(() => {
         switch (req.method) {
             case 'GET': {
-                if (req.query.board_id) {
-                    const fetchBoardQueryString = `SELECT * FROM board WHERE seq=${req.query.board_id}`;
-                    mysql_connection.query(fetchBoardQueryString, (err, rows) => {
-                        if (err) {
-                            res.status(500).json({ name: 'Internal Server Error' });
-                            res.end();
-                        } else {
-                            res.status(200).json(rows);
-                            res.end();
-                        }
-                    });
-                } else {
-                    const fetchBoardListQueryString = 'SELECT * FROM board';
-                    mysql_connection.query(fetchBoardListQueryString, (err, rows) => {
-                        if (err) {
-                            res.status(500).json({ name: 'Internal Server Error' });
-                            res.end();
-                        } else {
-                            res.status(200).json(rows);
-                            res.end();
-                        }
-                    });
-                }
+                const fetchBoardListQueryString = 'SELECT * FROM board';
+                mysql_connection.query(fetchBoardListQueryString, (err, rows) => {
+                    if (err) {
+                        res.status(500).json({ name: 'Internal Server Error' });
+                        res.end();
+                    } else {
+                        res.status(200).json(rows);
+                        res.end();
+                    }
+                });
                 break;
             }
             case 'POST': {
