@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { FileInfo } from '../models';
+import { uploadFiles } from '../aws/uploadFiles';
 
 export const fetchFilesInBoard = async (board_id: string) => {
     const res = await axios.get(`/api/file/${board_id}`);
@@ -7,10 +8,11 @@ export const fetchFilesInBoard = async (board_id: string) => {
     return board;
 };
 
-export const saveFileInBoard = async (fileNames: string[], boardId: number) => {
+export const saveFileInBoard = async (files: File[], boardId: string) => {
     const res = await axios.post(`/api/file/${boardId}`, {
-        file_names: fileNames
+        file_names: files.map((file) => file.name)
     });
+    await uploadFiles(files, boardId, res.data.insertId);
     const response = res.data;
     return response;
 };

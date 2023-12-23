@@ -32,7 +32,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
                             res.status(500).json({ name: 'Internal Server Error' });
                             res.end();
                         } else {
-                            res.status(200).json(rows[0]);
+                            res.status(200).json(rows);
                             res.end();
                         }
                     });

@@ -11,7 +11,6 @@ import {
     TextField
 } from '@mui/material';
 import { useRef, useState } from 'react';
-import { uploadFiles } from '../../aws/uploadFiles';
 import * as S from './styles';
 import { useSaveFile } from '../../queries/files';
 
@@ -39,8 +38,7 @@ export default function UploadDilaog(props: DialogProps & Props) {
 
     const handleUploadButtonClick = async () => {
         if (dialogProps.onClose) {
-            await uploadFiles(selectedFiles, boardId);
-            mutate({ fileNames: selectedFiles.map((file) => file.name), boardId: +boardId });
+            mutate({ files: selectedFiles, boardId });
             dialogProps.onClose({}, 'escapeKeyDown');
         }
     };
