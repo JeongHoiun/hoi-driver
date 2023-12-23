@@ -10,8 +10,8 @@ export function useFetchBoardInfo(board_id: string) {
 export function useSaveFile() {
     return useMutation(
         ['save_file'],
-        ({ fileName, boardId }: { fileName: string; boardId: number }) =>
-            saveFileInBoard({ fileName, boardId }),
+        ({ fileNames, boardId }: { fileNames: string[]; boardId: number }) =>
+            saveFileInBoard(fileNames, boardId),
         { onSuccess: () => queryClient.fetchQuery({ queryKey: ['files'] }) }
     );
 }

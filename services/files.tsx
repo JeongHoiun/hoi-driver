@@ -7,11 +7,9 @@ export const fetchFilesInBoard = async (board_id: string) => {
     return board;
 };
 
-export const saveFileInBoard = async (
-    { fileName, boardId }: { fileName: string; boardId: number }
-) => {
+export const saveFileInBoard = async (fileNames: string[], boardId: number) => {
     const res = await axios.post(`/api/file/${boardId}`, {
-        file_name: fileName
+        file_names: fileNames
     });
     const response = res.data;
     return response;
