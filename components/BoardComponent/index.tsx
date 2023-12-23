@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useFetchBoardInfo } from '../../queries/boards';
 import * as S from './styles';
 import UploadDilaog from './UploadDialog';
-import { useFetchImages } from '../../queries/images';
+import { useFetchFilesInBoard } from '../../queries/files';
 
 interface Props {
     board_id: string;
@@ -14,8 +14,7 @@ export default function BoardComponent(props: Props) {
     const { board_id } = props;
     const { data: board } = useFetchBoardInfo(board_id);
     const [openUploadDialog, setOpenUploadDialog] = useState(false);
-    const [page, setPage] = useState(1); // TODO: implement pagination
-    const { data: images, isLoading: loadingImages } = useFetchImages(board_id, page);
+    const { data: images, isLoading: loadingImages } = useFetchFilesInBoard(board_id);
 
     return (
         <S.BoardDiv>

@@ -5,5 +5,6 @@ export interface Board {
 
 export interface FileInfo {
     board_id: number;
-    file_name: string;
+    title: string;
+    seq: number;
 }

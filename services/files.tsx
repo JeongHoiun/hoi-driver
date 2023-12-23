@@ -4,7 +4,7 @@ import { uploadFiles } from '../aws/uploadFiles';
 
 export const fetchFilesInBoard = async (board_id: string) => {
     const res = await axios.get(`/api/file/${board_id}`);
-    const board: FileInfo = res.data;
+    const board: FileInfo[] = res.data;
     return board;
 };
 
