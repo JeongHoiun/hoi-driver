@@ -1,24 +1,42 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
 import mysql_connection from '../../../databases/connect';
+import { FileInfo } from '../../../models';
+import { ITEMS_PER_PAGE } from '../../../models/consts';
 
-type Data = {
-    name: string;
+type FilesResponse = {
+    files: FileInfo[],
+    totalCount: number,
 };
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+export default async function handler(
+    req: NextApiRequest, res: NextApiResponse<FilesResponse | Error>
+) {
     return new Promise(() => {
         switch (req.method) {
             case 'GET': {
-                const fetchBoardQueryString = `SELECT * FROM file WHERE board_id=${req.query.board_id}`;
-                mysql_connection.query(fetchBoardQueryString, (err, rows) => {
+                const { board_id, page } = req.query;
+                const safetyPage = page ? +page : 1;
+                const fetchBoardQueryString = `SELECT * FROM file WHERE board_id=${board_id} LIMIT ${ITEMS_PER_PAGE} OFFSET ${(safetyPage - 1) * ITEMS_PER_PAGE}`;
+                const boardFilesCountQueryString = `SELECT COUNT(*) as count FROM file WHERE board_id=${board_id}`;
+
+                mysql_connection.query(boardFilesCountQueryString, (err, count) => {
                     if (err) {
-                        res.status(500).json({ name: 'Internal Server Error' });
-                        res.end();
-                    } else {
-                        res.status(200).json(rows);
+                        res.status(500).json(new Error('Internal Server Error'));
                         res.end();
                     }
+                    mysql_connection.query(fetchBoardQueryString, (err2, rows) => {
+                        if (err) {
+                            res.status(500).json(new Error('Internal Server Error'));
+                            res.end();
+                        } else {
+                            res.status(200).json({
+                                totalCount: count[0].count,
+                                files: rows
+                            });
+                            res.end();
+                        }
+                    });
                 });
                 break;
             }
@@ -29,7 +47,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
                     [file_names.map((file_name) => [file_name, req.query.board_id])],
                     (err, rows) => {
                         if (err) {
-                            res.status(500).json({ name: 'Internal Server Error' });
+                            res.status(500).json(new Error('Internal Server Error'));
                             res.end();
                         } else {
                             res.status(200).json(rows);
@@ -39,7 +57,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
                 break;
             }
             default: {
-                res.status(405).json({ name: 'Method Not Allowed' });
+                res.status(405).json(new Error('Internal Server Error'));
                 res.end();
             }
         }

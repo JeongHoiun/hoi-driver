@@ -3,11 +3,12 @@ import { fetchFilesInBoard, saveFileInBoard } from '../services/files';
 import { queryClient } from '../pages/_app';
 import { fetchSpecificPageItems } from '../aws/fetchFiles';
 
-export function useFetchFilesInBoard(board_id: string) {
-    return useQuery<string[], Error>(['files', board_id], async () => {
-        const files = await fetchFilesInBoard(board_id);
+export function useFetchFilesInBoard(board_id: string, page: number) {
+    return useQuery<{blobUris: string[], totalCount: number}, Error>(['files', board_id, page], async () => {
+        const { files, totalCount } = await fetchFilesInBoard(board_id, page);
         const keys = files.map((file) => `${board_id}/${file.title}_${file.seq}`);
-        return fetchSpecificPageItems(keys);
+        const blobUris = await fetchSpecificPageItems(keys);
+        return { blobUris, totalCount };
     });
 }
 

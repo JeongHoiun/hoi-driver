@@ -1,10 +1,11 @@
-import { Button, Typography } from '@mui/material';
+import { Box, Button, Pagination, Typography } from '@mui/material';
 import UploadIcon from '@mui/icons-material/Upload';
 import { useState } from 'react';
 import { useFetchBoardInfo } from '../../queries/boards';
 import * as S from './styles';
 import UploadDilaog from './UploadDialog';
 import { useFetchFilesInBoard } from '../../queries/files';
+import { ITEMS_PER_PAGE } from '../../models/consts';
 
 interface Props {
     board_id: string;
@@ -14,7 +15,13 @@ export default function BoardComponent(props: Props) {
     const { board_id } = props;
     const { data: board } = useFetchBoardInfo(board_id);
     const [openUploadDialog, setOpenUploadDialog] = useState(false);
-    const { data: images, isLoading: loadingImages } = useFetchFilesInBoard(board_id);
+    const [page, setPage] = useState(1);
+    const { data: filesResponse, isLoading: loadingImages } = useFetchFilesInBoard(board_id, page);
+    const totalPage = Math.floor((filesResponse?.totalCount || 0) / ITEMS_PER_PAGE);
+
+    const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
+        setPage(value);
+    };
 
     return (
         <S.BoardDiv>
@@ -39,8 +46,19 @@ export default function BoardComponent(props: Props) {
                 </Button>
             </S.BoardTitleDiv>
             {loadingImages && <Typography variant="h5">Loading...</Typography>}
-            {images?.map((imageUrl, index) => <img src={imageUrl} key={index} alt={`Picture ${index}`} width="30%"/>
-            )}
+            { !loadingImages
+                && <>
+                    <Box display="flex" width="100%" justifyContent="end">
+                        <Pagination count={totalPage} page={page} onChange={handleChangePage} />
+                    </Box>
+                    {filesResponse?.blobUris?.map((imageUrl, index) =>
+                        <img style={{ margin: '8px' }} src={imageUrl} key={index} alt={`Picture ${index}`} width="30%"/>
+                    )}
+                    <Box display="flex" width="100%" justifyContent="end">
+                        <Pagination count={totalPage} page={page} onChange={handleChangePage} />
+                    </Box>
+                </>
+            }
         </S.BoardDiv>
     );
 }

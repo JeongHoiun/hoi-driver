@@ -2,9 +2,9 @@ import axios from 'axios';
 import { FileInfo } from '../models';
 import { uploadFiles } from '../aws/uploadFiles';
 
-export const fetchFilesInBoard = async (board_id: string) => {
-    const res = await axios.get(`/api/file/${board_id}`);
-    const board: FileInfo[] = res.data;
+export const fetchFilesInBoard = async (board_id: string, page: number) => {
+    const res = await axios.get(`/api/file/${board_id}?page=${page}`);
+    const board: {files: FileInfo[], totalCount: number} = res.data;
     return board;
 };
 
