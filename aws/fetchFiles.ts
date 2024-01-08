@@ -4,7 +4,7 @@ export async function fetchSpecificPageItems(keys: string[]) {
     try {
         const s3 = new AWS.S3();
         const promises = keys.map((v) =>
-            s3.getObject({ Bucket: 'hoi-driver', Key: v as string }).promise()
+            s3.getObject({ Bucket: 'hoi-driver', Key: `min/${v}` as string, }).promise()
         );
 
         const dataArray = await Promise.all(promises);
