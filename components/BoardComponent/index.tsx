@@ -19,7 +19,7 @@ export default function BoardComponent(props: Props) {
     const [openUploadDialog, setOpenUploadDialog] = useState(false);
     const router = useRouter();
     const { data: filesResponse, isLoading: loadingImages } = useFetchFilesInBoard(board_id, page);
-    const totalPage = Math.floor((filesResponse?.totalCount || 0) / ITEMS_PER_PAGE);
+    const totalPage = Math.ceil((filesResponse?.totalCount || 0) / ITEMS_PER_PAGE);
 
     const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
         const url = new URL(window.location.href);
