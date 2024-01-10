@@ -15,8 +15,8 @@ export function useFetchFilesInBoard(board_id: string, page: number) {
 export function useSaveFile() {
     return useMutation(
         ['save_file'],
-        ({ files, boardId }: { files: File[]; boardId: string }) =>
-            saveFileInBoard(files, boardId),
+        ({ files, boardId, tags }: { files: File[]; boardId: string; tags: string[] }) =>
+            saveFileInBoard(files, boardId, tags),
         { onSuccess: () => queryClient.fetchQuery({ queryKey: ['files'] }) }
     );
 }

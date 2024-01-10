@@ -38,7 +38,7 @@ export default function UploadDilaog(props: DialogProps & Props) {
 
     const handleUploadButtonClick = async () => {
         if (dialogProps.onClose) {
-            mutate({ files: selectedFiles, boardId });
+            mutate({ files: selectedFiles, boardId, tags });
             dialogProps.onClose({}, 'escapeKeyDown');
         }
     };

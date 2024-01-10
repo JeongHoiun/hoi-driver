@@ -41,10 +41,10 @@ export default async function handler(
                 break;
             }
             case 'POST': {
-                const { file_names } : { file_names:string[] } = req.body;
-                const fetchBoardQueryString = 'INSERT INTO file (title, board_id) VALUES ?';
+                const { file_names, tags } : { file_names:string[], tags: string[] } = req.body;
+                const fetchBoardQueryString = 'INSERT INTO file (title, board_id, tags) VALUES ?';
                 mysql_connection.query(fetchBoardQueryString,
-                    [file_names.map((file_name) => [file_name, req.query.board_id])],
+                    [file_names.map((fileName) => [fileName, req.query.board_id, tags.join(',')])],
                     (err, rows) => {
                         if (err) {
                             res.status(500).json(new Error('Internal Server Error'));
